@@ -4,43 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-select=none">
     <title>Pocket Pro: Claymorphic Expense Workspace</title>
-    <!-- Chart.js for Core Financial Visualizations -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <!-- html2pdf.js for Client-Side Premium Statement Exports -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <style>
         :root {
-            /* Claymorphism Dark Profile Palette Constants */
-            --bg-main: #1e222b;
-            --bg-card: #282e3d;
-            --bg-input: #1a1d26;
-            --text-primary: #f0f4f8;
-            --text-secondary: #a0aec0;
-            --accent-green: #27ae60;
-            --accent-red: #e74c3c;
-            --accent-blue: #2f80ed;
-            
-            /* 3D Clay Soft Shadow Configurations */
-            --clay-shadow: 0 12px 24px rgba(0, 0, 0, 0.25), 
-                           inset -6px -6px 12px rgba(0, 0, 0, 0.3), 
-                           inset 6px 6px 12px rgba(255, 255, 255, 0.05);
-            --clay-btn-blue: 0 8px 16px rgba(47, 128, 237, 0.3),
-                             inset -4px -4px 8px rgba(0, 0, 0, 0.4),
-                             inset 4px 4px 8px rgba(255, 255, 255, 0.2);
-            --clay-btn-green: 0 8px 16px rgba(39, 174, 96, 0.3),
-                              inset -4px -4px 8px rgba(0, 0, 0, 0.4),
-                              inset 4px 4px 8px rgba(255, 255, 255, 0.2);
-            --clay-btn-red: 0 8px 16px rgba(231, 76, 60, 0.3),
-                            inset -4px -4px 8px rgba(0, 0, 0, 0.4),
-                            inset 4px 4px 8px rgba(255, 255, 255, 0.2);
-            --clay-input-shadow: inset 4px 4px 8px rgba(0, 0, 0, 0.3),
-                                 inset -4px -4px 8px rgba(255, 255, 255, 0.05),
-                                 0 2px 4px rgba(0,0,0,0.1);
-            
-            --font-stack: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "Segoe UI", Roboto, sans-serif;
-        }
-
-        body.theme-light {
+            /* ─── CLAYMORPHIC LIGHT THEME PROFILE (DEFAULT SYSTEM STATE) ─── */
             --bg-main: #eef2f7;
             --bg-card: #f9fbfd;
             --bg-input: #e1e6ee;
@@ -50,6 +18,7 @@
             --accent-red: #e74c3c;
             --accent-blue: #3498db;
             
+            /* Organic 3D Clay Soft Shadow Vectors (Light Perspective) */
             --clay-shadow: 0 12px 24px rgba(166, 180, 200, 0.4), 
                            inset -6px -6px 12px rgba(166, 180, 200, 0.5), 
                            inset 6px 6px 12px rgba(255, 255, 255, 0.8);
@@ -64,17 +33,37 @@
                             inset 4px 4px 8px rgba(255, 255, 255, 0.4);
             --clay-input-shadow: inset 3px 3px 6px rgba(166, 180, 200, 0.4),
                                  inset -3px -3px 6px rgba(255, 255, 255, 0.9);
+            
+            --font-stack: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "Segoe UI", Roboto, sans-serif;
         }
 
-        body.theme-slate {
-            --bg-main: #273142;
-            --bg-card: #323f54;
-            --bg-input: #1f2735;
-            --text-primary: #f1f5f9;
-            --text-secondary: #94a3b8;
-            --accent-green: #10b981;
-            --accent-red: #ef4444;
-            --accent-blue: #3b82f6;
+        /* ─── CLAYMORPHIC OLED DARK THEME OVERRIDE PROFILE ─── */
+        body.theme-oled {
+            --bg-main: #0c0e14;
+            --bg-card: #181b24;
+            --bg-input: #0a0b10;
+            --text-primary: #f0f4f8;
+            --text-secondary: #a0aec0;
+            --accent-green: #27ae60;
+            --accent-red: #e74c3c;
+            --accent-blue: #2f80ed;
+            
+            /* Organic 3D Clay Soft Shadow Vectors (OLED Darkness Perspective) */
+            --clay-shadow: 0 12px 24px rgba(0, 0, 0, 0.5), 
+                           inset -6px -6px 12px rgba(0, 0, 0, 0.4), 
+                           inset 6px 6px 12px rgba(255, 255, 255, 0.04);
+            --clay-btn-blue: 0 8px 16px rgba(47, 128, 237, 0.3),
+                             inset -4px -4px 8px rgba(0, 0, 0, 0.4),
+                             inset 4px 4px 8px rgba(255, 255, 255, 0.2);
+            --clay-btn-green: 0 8px 16px rgba(39, 174, 96, 0.3),
+                              inset -4px -4px 8px rgba(0, 0, 0, 0.4),
+                              inset 4px 4px 8px rgba(255, 255, 255, 0.2);
+            --clay-btn-red: 0 8px 16px rgba(231, 76, 60, 0.3),
+                            inset -4px -4px 8px rgba(0, 0, 0, 0.4),
+                            inset 4px 4px 8px rgba(255, 255, 255, 0.2);
+            --clay-input-shadow: inset 4px 4px 8px rgba(0, 0, 0, 0.4),
+                                 inset -4px -4px 8px rgba(255, 255, 255, 0.03),
+                                 0 2px 4px rgba(0,0,0,0.2);
         }
 
         * {
@@ -92,7 +81,7 @@
             justify-content: center;
             align-items: flex-start;
             min-height: 100vh;
-            transition: all 0.3s ease;
+            transition: background 0.35s cubic-bezier(0.4, 0, 0.2, 1), color 0.35s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .phone-wrapper {
@@ -105,7 +94,7 @@
             position: relative;
         }
 
-        /* ─── CLAYMORPHIC APP NAVIGATION TOP BAR ─── */
+        /* App Context Ribbon Bar Controls */
         .app-bar {
             background-color: var(--bg-main);
             padding: 18px 20px;
@@ -163,9 +152,10 @@
             outline: none;
             cursor: pointer;
             box-shadow: var(--clay-shadow);
+            transition: background 0.3s, color 0.3s, box-shadow 0.3s;
         }
 
-        /* Content Workspace Frame */
+        /* Content Scroll Workspace Viewport Frame */
         .app-content {
             flex: 1;
             padding: 20px;
@@ -175,13 +165,14 @@
             padding-bottom: 110px;
         }
 
-        /* ─── CLAYMORPHIC COMMAND CARDS ─── */
+        /* Claymorphic Interactive Hud Panels */
         .command-center {
             background-color: var(--bg-card);
             border-radius: 28px;
             padding: 24px;
             position: relative;
             box-shadow: var(--clay-shadow);
+            transition: background 0.3s, box-shadow 0.3s;
         }
 
         .cc-label {
@@ -206,6 +197,7 @@
             padding-top: 18px;
             border-top: 2px solid var(--bg-input);
             font-size: 0.85rem;
+            transition: border-color 0.3s;
         }
 
         .metric-block span {
@@ -215,7 +207,7 @@
             margin-top: 4px;
         }
 
-        /* Utility Action Controls Grid Row */
+        /* Action Utilities Grid System Row */
         .utility-actions-panel {
             display: flex;
             gap: 12px;
@@ -236,14 +228,11 @@
             justify-content: center;
             gap: 8px;
             box-shadow: var(--clay-shadow);
-            transition: transform 0.1s ease;
+            transition: transform 0.1s ease, background 0.3s, box-shadow 0.3s;
         }
+        .btn-utility:active { transform: scale(0.96); }
 
-        .btn-utility:strong, .btn-utility:dominant, .btn-utility:active {
-            transform: scale(0.96);
-        }
-
-        /* AI Interactive Chat Sandbox Configuration */
+        /* AI Interactive Chat Sandbox Configurations */
         .ai-bot-card {
             background: var(--bg-card);
             border-radius: 28px;
@@ -252,6 +241,7 @@
             flex-direction: column;
             gap: 14px;
             box-shadow: var(--clay-shadow);
+            transition: background 0.3s, box-shadow 0.3s;
         }
 
         .ai-chat-header {
@@ -270,12 +260,9 @@
             border-radius: 12px;
             cursor: pointer;
             box-shadow: var(--clay-shadow);
-            transition: transform 0.1s;
+            transition: transform 0.1s, background 0.3s, box-shadow 0.3s;
         }
-
-        .btn-clear-ai:active {
-            transform: scale(0.93);
-        }
+        .btn-clear-ai:active { transform: scale(0.93); }
 
         .ai-chat-response-window {
             background: var(--bg-input);
@@ -287,6 +274,7 @@
             color: var(--text-primary);
             white-space: pre-line;
             box-shadow: var(--clay-input-shadow);
+            transition: background 0.3s, box-shadow 0.3s;
         }
 
         .ai-input-row {
@@ -304,6 +292,7 @@
             font-size: 0.9rem;
             outline: none;
             box-shadow: var(--clay-input-shadow);
+            transition: background 0.3s, box-shadow 0.3s;
         }
 
         .btn-ai-query {
@@ -320,19 +309,13 @@
         }
         .btn-ai-query:active { transform: scale(0.95); }
 
-        /* Analytics Visual Framework Modules */
+        /* Analytics Visual Area Containers */
         .analytics-card {
             background: var(--bg-card);
             border-radius: 28px;
             padding: 22px;
             box-shadow: var(--clay-shadow);
-        }
-
-        .section-title {
-            font-size: 1rem;
-            font-weight: 700;
-            color: var(--text-primary);
-            margin-bottom: 4px;
+            transition: background 0.3s, box-shadow 0.3s;
         }
 
         .chart-wrapper {
@@ -342,7 +325,7 @@
             margin-top: 10px;
         }
 
-        /* Mobile Responsive System Stream Ledgers */
+        /* System Dynamic Operations Ledgers Streams */
         .ledger-container {
             display: flex;
             flex-direction: column;
@@ -357,6 +340,7 @@
             justify-content: space-between;
             align-items: center;
             box-shadow: var(--clay-shadow);
+            transition: background 0.3s, box-shadow 0.3s;
             animation: slideUpFadeIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.1);
         }
 
@@ -368,7 +352,7 @@
         .t-left { display: flex; flex-direction: column; gap: 4px; }
         .t-merchant { font-weight: 700; font-size: 1rem; }
         .t-meta { font-size: 0.8rem; color: var(--text-secondary); display: flex; align-items: center; gap: 8px; }
-        .t-category-badge { background: var(--bg-input); padding: 4px 10px; border-radius: 10px; font-weight: 700; box-shadow: var(--clay-input-shadow); }
+        .t-category-badge { background: var(--bg-input); padding: 4px 10px; border-radius: 10px; font-weight: 700; box-shadow: var(--clay-input-shadow); transition: background 0.3s, box-shadow 0.3s; }
         .t-right { display: flex; align-items: center; gap: 12px; }
         .t-amount { font-weight: 800; font-size: 1.05rem; }
         .t-amount.expense { color: var(--text-primary); }
@@ -379,7 +363,7 @@
             cursor: pointer; font-size: 1.4rem; padding: 4px;
         }
 
-        /* Tactile Floating Action Action Trigger Configuration Elements */
+        /* Tactile Floating Primary Input Nodes Action Triggers */
         .fab-trigger {
             position: fixed;
             bottom: 24px;
@@ -402,19 +386,15 @@
             z-index: 90;
             transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
+        .fab-trigger:active { transform: translateX(-50%) scale(0.92); }
 
-        .fab-trigger:active {
-            transform: translateX(-50%) scale(0.92);
-        }
-
-        /* Premium Smooth Bottom Sheets */
+        /* Slideway Entry Base Sheet Components */
         .modal-overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(12, 15, 20, 0.6); backdrop-filter: blur(10px); z-index: 100;
+            background: rgba(12, 15, 20, 0.4); backdrop-filter: blur(10px); z-index: 100;
             display: flex; flex-direction: column; justify-content: flex-end;
             opacity: 0; pointer-events: none; transition: opacity 0.25s ease;
         }
-        
         .modal-overlay.active { opacity: 1; pointer-events: auto; }
 
         .input-sheet {
@@ -428,7 +408,6 @@
             transition: transform 0.35s cubic-bezier(0.23, 1, 0.32, 1);
             box-shadow: var(--clay-shadow);
         }
-        
         .modal-overlay.active .input-sheet { transform: translateY(0); }
 
         .sheet-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 22px; }
@@ -446,19 +425,19 @@
 
         .form-field { display: flex; flex-direction: column; gap: 6px; }
         .form-field label { font-size: 0.75rem; color: var(--text-secondary); text-transform: uppercase; font-weight: 700; letter-spacing: 0.5px; }
-        .form-field input, .form-field select { background: var(--bg-input); border: none; color: var(--text-primary); padding: 14px; border-radius: 16px; font-size: 1rem; outline: none; box-shadow: var(--clay-input-shadow); -webkit-appearance: none; }
+        .form-field input, .form-field select { background: var(--bg-input); border: none; color: var(--text-primary); padding: 14px; border-radius: 16px; font-size: 1rem; outline: none; box-shadow: var(--clay-input-shadow); -webkit-appearance: none; transition: background 0.3s, box-shadow 0.3s; }
 
         .custom-field-container { max-height: 0; overflow: hidden; transition: max-height 0.25s ease, opacity 0.2s; opacity: 0; display: flex; flex-direction: column; gap: 6px; }
         .custom-field-container.visible { max-height: 90px; opacity: 1; }
 
-        .btn-submit-transaction { background: var(--accent-blue); color: white; border: none; padding: 16px; border-radius: 18px; font-size: 1rem; font-weight: 700; cursor: pointer; margin-top: 10px; box-shadow: var(--clay-btn-blue); transition: transform 0.1s; }
+        .btn-submit-transaction { background: var(--accent-blue); color: white; border: none; padding: 16px; border-radius: 18px; font-size: 1rem; font-weight: 700; cursor: pointer; margin-top: 10px; box-shadow: var(--clay-btn-blue); transition: transform 0.1s, background 0.3s; }
         .btn-submit-transaction:active { transform: scale(0.96); }
         .btn-submit-transaction.expense-mode { background: var(--accent-red); box-shadow: var(--clay-btn-red); }
         .btn-submit-transaction.income-mode { background: var(--accent-green); box-shadow: var(--clay-btn-green); }
 
         .empty-state { text-align: center; color: var(--text-secondary); padding: 40px 0; font-size: 0.9rem; }
 
-        /* ─── PREMIUM SYSTEM OVERRIDE: FLOATING SMART POP-UP BANNER ─── */
+        /* Floating Clay Alert Popup Modals */
         .clay-toast-alert {
             position: fixed;
             top: -100px;
@@ -469,19 +448,20 @@
             background: var(--bg-card);
             border-radius: 20px;
             padding: 16px 20px;
-            box-shadow: 0 16px 32px rgba(0,0,0,0.3), var(--clay-shadow);
+            box-shadow: 0 16px 32px rgba(0,0,0,0.15), var(--clay-shadow);
             z-index: 1000;
             display: flex;
             align-items: center;
             gap: 12px;
-            transition: top 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.2);
+            transition: top 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.2), background 0.3s, box-shadow 0.3s;
         }
+        body.theme-oled .clay-toast-alert { box-shadow: 0 16px 32px rgba(0,0,0,0.4), var(--clay-shadow); }
         
         .clay-toast-alert.active { top: 20px; }
         .clay-toast-icon { font-size: 1.3rem; }
         .clay-toast-message { font-size: 0.95rem; font-weight: 700; color: var(--text-primary); }
 
-        /* Document Blueprint Printing Frame Definitions */
+        /* PDF Printing Canvas Elements Blueprint Templates */
         #pdf-render-blueprint-target {
             display: none;
             background: white;
@@ -496,10 +476,9 @@
 </head>
 <body>
 
-<!-- Dynamic Smart Clay Alert Layer -->
 <div class="clay-toast-alert" id="system-toast-layer">
     <span class="clay-toast-icon" id="toast-icon-target">⚠️</span>
-    <span class="clay-toast-message" id="toast-msg-target">Alert Notification Context</span>
+    <span class="clay-toast-message" id="toast-msg-target">Notification Message</span>
 </div>
 
 <div class="phone-wrapper">
@@ -516,8 +495,8 @@
                 <option value="GBP">£ (GBP)</option>
             </select>
             <select class="config-dropdown" id="theme-selector" onchange="switchThemeWorkspace(this.value)">
-                <option value="oled">OLED</option>
                 <option value="light">Light</option>
+                <option value="oled">OLED</option>
             </select>
         </div>
     </div>
@@ -575,7 +554,6 @@
         <span>+</span> Log Record
     </button>
 
-    <!-- Modal Form Capture Sheet -->
     <div class="modal-overlay" id="form-sheet-overlay" onclick="handleOutsideOverlayClick(event)">
         <div class="input-sheet" id="interactive-sheet-frame">
             <div class="sheet-header">
@@ -602,8 +580,7 @@
                 <div class="form-field">
                     <label>Category Blueprint</label>
                     <select id="input-category" onchange="handleCategorySelectionChange(this)">
-                        <!-- Loaded runtime via JS options setup execution passes -->
-                    </select>
+                        </select>
                 </div>
 
                 <div class="custom-field-container" id="custom-category-field-group">
@@ -622,7 +599,6 @@
     </div>
 </div>
 
-<!-- PRINT Context Target Blueprint -->
 <div id="pdf-render-blueprint-target">
     <div class="pdf-header">
         <div>
@@ -671,7 +647,7 @@
         updateAIChatDisplay();
     });
 
-    /* ─── MODERN SMART TOAST ROUTINE WRAPPER (REPLACES DEFAULT ALERTS) ─── */
+    /* ─── FLOATING IN-APP SMART TOAST ALERTS ─── */
     function renderClayToastAlert(messageText, iconString = '⚠️') {
         const toastNode = document.getElementById('system-toast-layer');
         document.getElementById('toast-icon-target').innerText = iconString;
@@ -680,12 +656,17 @@
         toastNode.classList.add('active');
         setTimeout(() => {
             toastNode.classList.remove('active');
-        }, 3500); // Retain display framework visibility safely for 3.5 seconds
+        }, 3200);
     }
 
+    /* ─── DYNAMIC THEME workspace ARCHITECTURE TOGGLER ─── */
     function switchThemeWorkspace(themeValue) {
-        document.body.className = '';
-        if(themeValue === 'light') document.body.classList.add('theme-light');
+        document.body.className = ''; // Reset standard classes
+        if(themeValue === 'oled') {
+            document.body.classList.add('theme-oled');
+        }
+        // Force rendering canvas loops to reload font/grid coloring parameters natively if active
+        synchronizeSystemMetrics();
     }
 
     function switchBookWorkspace(targetWorkspace) {
@@ -712,7 +693,6 @@
     }
 
     function wipeCurrentAIHistory() {
-        // Evaluate history registry parameters before triggering operational shifts
         const targetHist = currentBookWorkspace === 'Personal' ? aiHistoryPersonal : aiHistoryBusiness;
         
         if (targetHist === defaultAIWelcome) {
@@ -878,7 +858,9 @@
         document.getElementById('hud-balance').innerText = `${currSym}${residualNetLiquidBalance.toLocaleString('en-IN', {minimumFractionDigits:2})}`;
         document.getElementById('hud-income').innerText = `${currSym}${calculatedGrossIncome.toLocaleString('en-IN', {minimumFractionDigits:2})}`;
         document.getElementById('hud-spent').innerText = `${currSym}${calculatedGrossExpense.toLocaleString('en-IN', {minimumFractionDigits:2})}`;
-        document.getElementById('hud-balance').style.color = residualNetLiquidBalance >= 0 ? 'var(--text-primary)' : 'var(--accent-red)';
+        
+        const isOledActive = document.body.classList.contains('theme-oled');
+        document.getElementById('hud-balance').style.color = residualNetLiquidBalance >= 0 ? (isOledActive ? '#f0f4f8' : '#2c3e50') : 'var(--accent-red)';
 
         renderSystemLedgerStream(structuralWorkspaceScopeFilter);
         updateChartVisualizationData(classificationSums);
@@ -918,7 +900,6 @@
         });
     }
 
-    /* ─── CLAY-TOAST POWERED PDF GENERATION ENGINE ─── */
     function exportStatementPDF() {
         const structuralWorkspaceScopeFilter = databaseTransactions.filter(t => t.book === currentBookWorkspace);
         const currSym = currencyVisualMap[systemCurrencySymbolCode];
@@ -1065,7 +1046,7 @@
             },
             options: {
                 responsive: true, maintainAspectRatio: false,
-                plugins: { legend: { position: 'right', labels: { color: '#8b949e', font: { size: 11 }, boxWidth: 10 } } },
+                plugins: { legend: { position: 'right', labels: { color: '#7f8c8d', font: { size: 11 }, boxWidth: 10 } } },
                 cutout: '74%'
             }
         });
@@ -1082,10 +1063,14 @@
             }
         });
 
+        // Sync visual labels configuration variables with dark mode limits dynamically
+        const isOledActive = document.body.classList.contains('theme-oled');
+        applicationChartInstance.options.plugins.legend.labels.color = isOledActive ? '#a0aec0' : '#7f8c8d';
+
         if(renderingValuesArray.length === 0) {
             applicationChartInstance.data.labels = ['Unallocated Space'];
             applicationChartInstance.data.datasets[0].data = [1];
-            applicationChartInstance.data.datasets[0].backgroundColor = ['#21262d'];
+            applicationChartInstance.data.datasets[0].backgroundColor = [isOledActive ? '#0a0b10' : '#e1e6ee'];
         } else {
             applicationChartInstance.data.labels = renderingLabelsArray;
             applicationChartInstance.data.datasets[0].data = renderingValuesArray;
